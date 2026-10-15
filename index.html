@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Vaz | Cyber-Command Kernel</title>
+    
+    <!-- Tailwind CSS for rapid structural styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Spline 3D Viewer -->
+    <script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.82/build/spline-viewer.js"></script>
+    
+    <!-- Share Tech Mono Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --term-green: #b8dbd3;
+            --term-green-glow: rgba(184, 219, 211, 0.4);
+            --term-bg: #030a08;
+            --glass-bg: rgba(3, 10, 8, 0.15); /* Significantly more transparent */
+            --glass-border: rgba(184, 219, 211, 0.15);
+            --alert-color: #cbb47a;
+        }
+
+        body, html {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--term-bg);
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--term-green);
+        }
+
+        /* 3D Background Layer */
+        .spline-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        /* Scanline CRT Overlay - click through */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            background-size: 100% 3px, 3px 100%;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* 
+           UI Layer Parent
+           CRITICAL: pointer-events: none allows mouse to hit Spline.
+        */
+        .ui-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* UI Elements that need interaction */
+        .interactive {
+            pointer-events: auto;
+        }
+
+        /* High-Blur Glassmorphism Utilities */
+        .ghost-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Typography & Glows */
+        .glow-text {
+            text-shadow: 0 0 6px var(--term-green-glow);
+        }
+        .glow-text-alert {
+            color: var(--alert-color);
+            text-shadow: 0 0 6px rgba(203, 180, 122, 0.4);
+        }
+        .glow-text-white {
+            color: #ffffff;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Boot Screen */
+        #boot-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(3, 10, 8, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            pointer-events: auto;
+        }
+        
+        #boot-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--term-green);
+            color: var(--term-green);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.25rem;
+            outline: none;
+            text-align: center;
+            width: 300px;
+            padding: 5px;
+            text-shadow: 0 0 5px var(--term-green-glow);
+        }
+
+        .blinking-cursor::after {
+            content: '█';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Dock Navigation */
+        .nav-dock {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            align-self: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dock-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--term-green);
+            background: rgba(184, 219, 211, 0.05);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .dock-btn:hover, .dock-btn.active {
+            background: rgba(184, 219, 211, 0.15);
+            border-color: var(--term-green);
+            box-shadow: 0 0 10px var(--term-green-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Modal / Centered Panel */
+        #data-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 90%;
+            max-width: 650px;
+            max-height: 70vh;
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #data-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.8); /* Ensures readability over 3D model */
+        }
+
+        /* Custom Scrollbar for Modal */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(184, 219, 211, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--term-green); }
+
+    </style>
+</head>
+<body>
+
+    <!-- WebGL Background -->
+    <div class="spline-layer">
+        <spline-viewer events-target="global" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/Z8dPfClUQsTwMCQC/scene.splinecode"></spline-viewer>
+    </div>
+
+    <!-- CRT Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- BOOT SEQUENCE OVERLAY -->
+    <div id="boot-screen">
+        <div class="mb-6 text-center">
+            <i class="fa-solid fa-fingerprint text-4xl mb-4 opacity-70"></i>
+            <h1 class="text-2xl tracking-widest uppercase glow-text">AARON_VAZ_OS // KERNEL v2.0</h1>
+            <p class="text-sm opacity-60 mt-2">SECURE BIOMETRIC LINK ESTABLISHED.</p>
+        </div>
+        
+        <div class="flex flex-col items-center gap-4">
+            <label for="boot-input" class="text-xs tracking-widest opacity-80 uppercase">Enter Command (init, boot, start):</label>
+            <div class="relative flex items-center gap-2">
+                <span class="text-xl">></span>
+                <input type="text" id="boot-input" autocomplete="off" spellcheck="false" autofocus>
+            </div>
+            
+            <button onclick="checkBootCommand(true)" class="mt-4 px-6 py-2 border border-[#b8dbd3] text-[#b8dbd3] hover:bg-[#b8dbd3] hover:text-[#030a08] transition-all text-xs tracking-widest uppercase cursor-pointer">
+                [ AUTO-INITIALIZE ]
+            </button>
+        </div>
+        <div id="boot-error" class="text-[#cbb47a] text-xs mt-4 h-4 tracking-wider"></div>
+    </div>
+
+    <!-- MAIN UI LAYER (Invisible to clicks, items inside are clickable) -->
+    <div class="ui-layer" id="main-ui" style="opacity: 0; visibility: hidden; transition: opacity 1s;">
+        
+        <!-- Top Bar: Telemetry (Small, Top Right) -->
+        <div class="w-full flex justify-end p-4">
+            <div class="ghost-glass interactive px-3 py-1.5 rounded text-xs flex gap-4 glow-text">
+                <span>COORD: <span id="tele-x">000</span>, <span id="tele-y">000</span></span>
+                <span class="opacity-50">|</span>
+                <span>TARGET: AARON_VAZ</span>
+            </div>
+        </div>
+
+        <!-- Centered Ghost Modal for Content -->
+        <div id="data-modal" class="ghost-glass interactive">
+            <div class="modal-header">
+                <div class="flex items-center gap-2">
+                    <i id="modal-icon" class="fa-solid fa-terminal"></i>
+                    <span id="modal-title" class="tracking-widest uppercase font-bold glow-text">SYSTEM_DATA</span>
+                </div>
+                <button onclick="closeModal()" class="hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <!-- Typewriter content goes here -->
+            </div>
+        </div>
+
+        <!-- Bottom Dock Navigation -->
+        <div class="w-full flex justify-center pb-6">
+            <nav class="nav-dock ghost-glass interactive">
+                <button class="dock-btn" onclick="openSection('identity', this)">
+                    <i class="fa-solid fa-user-astronaut"></i> [ID_PROFILE]
+                </button>
+                <button class="dock-btn" onclick="openSection('stack', this)">
+                    <i class="fa-solid fa-microchip"></i> [TECH_STACK]
+                </button>
+                <button class="dock-btn" onclick="openSection('projects', this)">
+                    <i class="fa-solid fa-gamepad"></i> [PROJECTS]
+                </button>
+                <button class="dock-btn" onclick="openSection('logs', this)">
+                    <i class="fa-solid fa-trophy"></i> [AWARD_LOGS]
+                </button>
+                <button class="dock-btn" onclick="openSection('lore', this)">
+                    <i class="fa-solid fa-book-journal-whills"></i> [USER_LORE]
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Interaction Script -->
+    <script>
+        // --- 1. BOOT SEQUENCE LOGIC ---
+        const bootInput = document.getElementById('boot-input');
+        const bootError = document.getElementById('boot-error');
+        
+        // Keep focus on input
+        document.addEventListener('click', (e) => {
+            if (document.getElementById('boot-screen').style.opacity !== '0') {
+                bootInput.focus();
+            }
+        });
+
+        bootInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkBootCommand(false);
+            }
+        });
+
+        function checkBootCommand(force = false) {
+            const val = bootInput.value.trim().toLowerCase();
+            const validCommands = ['init', 'boot', 'start', 'run', 'wake'];
+            
+            if (force || validCommands.includes(val)) {
+                bootError.innerText = "INITIALIZING KERNEL...";
+                bootError.style.color = "var(--term-green)";
+                setTimeout(startSystem, 600);
+            } else {
+                bootError.innerText = `ERR: COMMAND '${val}' NOT RECOGNIZED.`;
+                bootInput.value = '';
+            }
+        }
+
+        function startSystem() {
+            const bootScreen = document.getElementById('boot-screen');
+            const mainUI = document.getElementById('main-ui');
+            
+            bootScreen.style.opacity = '0';
+            bootScreen.style.pointerEvents = 'none';
+            setTimeout(() => {
+                bootScreen.style.display = 'none';
+                mainUI.style.visibility = 'visible';
+                mainUI.style.opacity = '1';
+            }, 800);
+        }
+
+        // --- 2. TELEMETRY TRACKING ---
+        document.addEventListener('mousemove', (e) => {
+            document.getElementById('tele-x').innerText = e.clientX.toString().padStart(3, '0');
+            document.getElementById('tele-y').innerText = e.clientY.toString().padStart(3, '0');
+        });
+
+        // --- 3. DATABASE CONTENT ---
+        const db = {
+            identity: {
+                icon: 'fa-user-astronaut',
+                title: 'SYS.IDENTITY_PROFILE',
+                content: `
+                    > <span class="glow-text-white">SUBJECT: Aaron Vaz</span>
+                    > STATUS: 2nd Year BCA Undergraduate @ St. Joseph's University, Bengaluru
+                    > ROLE: Batch Class Representative
+                    > NETWORK: Google Student Ambassador (Active Term)
+                    > ----------------------------------------------------
+                    > TRAJECTORY FORECAST:
+                    > Pending Auth: Adobe Student Insider Program
+                    > Pending Auth: Claude Campus Ambassador Program
+                    > Horizon 01: 4th-Year Honours OR PG Diploma (Data Analytics / CyberSec & AI)
+                    > Horizon 02: Research Internship @ OIST, Japan
+                    > Horizon 03: Google India Apprenticeship Program (Dev/PM/Data)
+                `
+            },
+            stack: {
+                icon: 'fa-microchip',
+                title: 'SYS.TECH_STACK_MATRIX',
+                content: `
+                    > MOUNTING LIBRARIES AND FRAMEWORKS...
+                    > 
+                    > <span class="glow-text-alert">[FRONT-END ARCHITECTURE]</span>
+                    > HTML5, CSS3, JavaScript (ES6+), ReactJS, Tailwind CSS
+                    > 
+                    > <span class="glow-text-alert">[SPATIAL & 3D GRAPHICS]</span>
+                    > Spline 3D Web Design, HTML5 Canvas API, WebGL
+                    > 
+                    > <span class="glow-text-alert">[GENERATIVE AI PIPELINE]</span>
+                    > Google Gemini, NotebookLM, Google Antigravity, Imagen/Veo
+                    > 
+                    > <span class="glow-text-alert">[SYSTEMS & DATABASE]</span>
+                    > MySQL Relational Databases
+                    > Android Termux Shell, ADB CLI Commands, F-Droid Ecosystem
+                `
+            },
+            projects: {
+                icon: 'fa-gamepad',
+                title: 'DIR.INTERACTIVE_BUILDS',
+                content: `
+                    > QUERYING REPOSITORIES...
+                    > 
+                    > <span class="glow-text-white">FILE: The Banan-Odyssey: Descent into Tartarus</span>
+                    > ENGINE: Vanilla HTML5 Canvas & JS
+                    > DATA: A 2D action side-scroller featuring custom sprite physics, 
+                    > collision detection, and 60fps rendering. Hosted on GitHub.
+                    > 
+                    > <span class="glow-text-white">FILE: Elixir Open Day Web Showcase</span>
+                    > FRAMEWORK: ReactJS + Tailwind
+                    > DATA: Highly interactive web exhibition built for SJU Open Day 2026.
+                    > RESULT: Secured 2nd Place Overall globally across teams.
+                    >
+                    > <span class="glow-text-white">FILE: Spatial Spline Portfolio</span>
+                    > DATA: Low-poly self-portrait rigged with look-at mouse tracking 
+                    > and glassmorphic DOM layering. (Currently Viewing).
+                `
+            },
+            logs: {
+                icon: 'fa-trophy',
+                title: 'SYS.ACHIEVEMENT_LOGS',
+                content: `
+                    > DECRYPTING COMMENDATIONS...
+                    >
+                    > <span class="glow-text-alert">ACHIEVEMENT UNLOCKED: 1st Place</span>
+                    > EVENT: MULTIPLEXER 2026 Intra-College Fest
+                    > DOMAIN: Prompt Engineering & Multi-modal GenAI pipelines.
+                    > 
+                    > <span class="glow-text-alert">ACHIEVEMENT UNLOCKED: 2nd Place Overall</span>
+                    > EVENT: University Open Day 2026 (Elixir Competition)
+                    > DOMAIN: Interactive UI/UX Development.
+                    >
+                    > <span class="glow-text-white">CERTIFICATION BATCH: ICT Academy Learnathon</span>
+                    > METRIC: 15/15 Courses Completed
+                    > CLUSTERS: Google Cloud Computing, Microsoft Learn, Snowflake Data.
+                    >
+                    > <span class="glow-text-white">EVENT DEPLOYMENT: Christ Magnovite Fest</span>
+                    > STATUS: Active Participant / Competitor.
+                `
+            },
+            lore: {
+                icon: 'fa-book-journal-whills',
+                title: 'DIR.PERSONAL_LORE',
+                content: `
+                    > EXECUTING HUMAN_ELEMENT.SH...
+                    >
+                    > <span class="glow-text-alert">[AUDIO_KINETIC]</span>
+                    > Acoustic Drum Kit (Active Rotation)
+                    > Roller Skating (Urban Mobility)
+                    >
+                    > <span class="glow-text-alert">[LITERATURE_DATABASE]</span>
+                    > Genres: YA, High Fantasy, Psychological Thriller
+                    > Indexed Series: Six of Crows, Throne of Glass, The Demonata, 
+                    > Rick Riordan Universe, A Good Girl's Guide to Murder, The Housemaid.
+                    >
+                    > <span class="glow-text-alert">[VIRTUAL_SIMULATIONS]</span>
+                    > Network Activity: PUBG, Genshin Impact, Fortnite, League of Legends.
+                    >
+                    > <span class="glow-text-alert">[CONSUMPTION_LOGS]</span>
+                    > Cinema tracking established via Letterboxd API.
+                    > Craft Chocolate & Specialty Coffee Festivals logged in Bengaluru cache.
+                `
+            }
+        };
+
+        // --- 4. MODAL & TYPEWRITER LOGIC ---
+        const modal = document.getElementById('data-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalBody = document.getElementById('modal-body');
+        let typeWriterTimeout;
+
+        function openSection(key, btnElement) {
+            // Update active button state
+            document.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+
+            const data = db[key];
+            if(!data) return;
+
+            // Setup Header
+            modalIcon.className = `fa-solid ${data.icon}`;
+            modalTitle.innerText = data.title;
+            
+            // Open Modal
+            modal.classList.add('active');
+            
+            // Run Typewriter
+            modalBody.innerHTML = '';
+            clearTimeout(typeWriterTimeout);
+            
+            // Format HTML string into array of lines, keeping HTML tags intact for rendering
+            const lines = data.content.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            
+            let lineIndex = 0;
+            
+            function typeNextLine() {
+                if (lineIndex < lines.length) {
+                    const lineDiv = document.createElement('div');
+                    lineDiv.innerHTML = lines[lineIndex];
+                    lineDiv.style.opacity = '0';
+                    lineDiv.style.transform = 'translateY(5px)';
+                    lineDiv.style.transition = 'opacity 0.2s, transform 0.2s';
+                    modalBody.appendChild(lineDiv);
+                    
+                    // Trigger reflow to animate
+                    void lineDiv.offsetWidth;
+                    lineDiv.style.opacity = '1';
+                    lineDiv.style.transform = 'translateY(0)';
+                    
+                    lineIndex++;
+                    modalBody.scrollTop = modalBody.scrollHeight;
+                    typeWriterTimeout = setTimeout(typeNextLine, 100); // Speed of line appearing
+                } else {
+                    // Add cursor at the end
+                    const cursorDiv = document.createElement('div');
+                    cursorDiv.innerHTML = '<span class="blinking-cursor"></span>';
+                    modalBody.appendChild(cursorDiv);
+                    modalBody.scrollTop = modalBody.scrollHeight;
+                }
+            }
+            
+            typeNextLine();
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('active'));
+            clearTimeout(typeWriterTimeout);
+        }
+
+    </script>
+</body>
+</html>
