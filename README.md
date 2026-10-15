@@ -29,3 +29,4 @@ A high-performance, cyberpunk-inspired terminal HUD and personal portfolio. The 
 ```text
 ├── index.html       # Single-file architecture (WebGL embed, UI HUD, script logic)
 └── README.md        # Documentation
+└── LICENSE          # LICENSE
