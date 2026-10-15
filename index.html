@@ -313,8 +313,8 @@
                 <input type="text" id="boot-input" autocomplete="off" spellcheck="false" autofocus>
             </div>
             
-            <button onclick="checkBootCommand(true)" class="mt-4 px-6 py-2 border border-[#b8dbd3] text-[#b8dbd3] hover:bg-[#b8dbd3] hover:text-[#030a08] transition-all text-xs tracking-widest uppercase cursor-pointer">
-                [ AUTO-INITIALIZE ]
+            <button onclick="checkBootCommand()" class="mt-4 px-6 py-2 border border-[#b8dbd3] text-[#b8dbd3] hover:bg-[#b8dbd3] hover:text-[#030a08] transition-all text-xs tracking-widest uppercase cursor-pointer">
+                [ INITIALIZE ]
             </button>
         </div>
         <div id="boot-error" class="text-[#cbb47a] text-xs mt-4 h-4 tracking-wider text-center px-4"></div>
@@ -385,20 +385,13 @@
 
         bootInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
-                checkBootCommand(false);
+                checkBootCommand();
             }
         });
 
-        function checkBootCommand(force = false) {
+        function checkBootCommand() {
             const val = bootInput.value.trim().toLowerCase();
-            const validCommands = ['init', 'boot', 'start', 'run', 'wake'];
-            
-            if (force) {
-                bootError.innerText = "INITIALIZING KERNEL...";
-                bootError.style.color = "var(--term-green)";
-                setTimeout(startSystem, 600);
-                return;
-            }
+            const validCommands = ['start', 'boot', 'init'];
             
             if (val === '') {
                 bootError.innerText = "ERR: NO COMMAND ENTERED.";
