@@ -159,7 +159,7 @@
         #badge-wrapper {
             top: 0;
             left: 50%;
-            margin-left: -147.5px;
+            margin-left: -135px;
         }
         @media (min-width: 640px) {
             #badge-wrapper {
@@ -219,37 +219,40 @@
     <main class="w-full min-h-screen flex flex-col lg:flex-row relative">
         
         <!-- LEFT COLUMN: SCROLLABLE PORTFOLIO STORY (w-full lg:w-7/12) -->
-        <div class="w-full lg:w-7/12 min-h-screen px-6 sm:px-12 lg:px-16 xl:px-20 pt-28 sm:pt-32 pb-32 z-10 flex flex-col">
+        <div class="w-full lg:w-7/12 min-h-screen px-4 sm:px-10 lg:px-16 xl:px-20 pt-20 sm:pt-28 pb-28 z-10 flex flex-col">
             
             <!-- SECTION 1: HERO -->
             <section id="hero" class="min-h-[75vh] flex flex-col justify-start pt-2 sm:pt-4 section-target" style="scroll-margin-top: 140px;">
                 <div class="max-w-xl">
                     <!-- Big Editorial Headline -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-charcoal leading-[1.14]">
+                    <h1 class="text-3xl sm:text-4xl lg:text-[56px] font-extrabold tracking-tight text-charcoal leading-[1.18] sm:leading-[1.14]">
                         I build digital products & software that people 
                         <span id="typewriter-word" class="text-[#829d38] font-bold">explore</span><span class="typewriter-cursor"></span>
                     </h1>
 
+                    <!-- MOBILE BADGE MOUNT TARGET: Dynamically mounted here on screens < 1024px -->
+                    <div id="mobile-hero-stage" class="block lg:hidden w-full my-4 flex justify-center relative overflow-visible h-[425px]"></div>
+
                     <!-- Bio Subtext -->
-                    <p class="mt-8 text-lg sm:text-xl text-[#4a4a4f] leading-relaxed font-normal max-w-xl">
+                    <p class="mt-4 sm:mt-8 text-sm sm:text-lg lg:text-xl text-[#4a4a4f] leading-relaxed font-normal max-w-xl">
                         Computer Applications undergraduate at St. Joseph's University, Bengaluru (CGPA 8.48 / 10.0). 
                         Google Student Ambassador & elected Class Representative specializing in Computer Vision, Human-Computer Interaction, and Interactive 3D systems.
                     </p>
 
                     <!-- CTAs -->
-                    <div class="mt-10 flex flex-wrap items-center gap-4">
-                        <a href="#work" class="px-8 py-4 rounded-full bg-[#829d38] hover:bg-[#718a2e] text-white font-semibold text-sm tracking-wide transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 inline-flex items-center gap-2">
+                    <div class="mt-6 sm:mt-10 flex flex-wrap items-center gap-3 sm:gap-4">
+                        <a href="#work" class="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-[#829d38] hover:bg-[#718a2e] text-white font-semibold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 inline-flex items-center gap-2">
                             <span>VIEW WORK</span>
                             <i class="fa-solid fa-arrow-down text-xs"></i>
                         </a>
-                        <a href="#about" class="px-8 py-4 rounded-full bg-white hover:bg-neutral-50 text-charcoal border border-neutral-300 font-semibold text-sm tracking-wide transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 inline-flex items-center gap-2">
+                        <a href="#about" class="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-white hover:bg-neutral-50 text-charcoal border border-neutral-300 font-semibold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 inline-flex items-center gap-2">
                             <span>ABOUT ME</span>
                             <i class="fa-regular fa-user text-xs"></i>
                         </a>
                     </div>
 
                     <!-- Bottom drag indicator hint (matching reel) -->
-                    <div class="mt-16 flex items-center gap-2 text-xs font-mono text-muted tracking-widest uppercase">
+                    <div class="mt-8 sm:mt-16 flex items-center gap-2 text-xs font-mono text-muted tracking-widest uppercase">
                         <span class="w-2 h-2 rounded-full bg-[#829d38]"></span>
                         <span>DRAG THE PASS &nbsp;•&nbsp; CLICK TO FLIP</span>
                     </div>
@@ -257,33 +260,33 @@
             </section>
 
             <!-- SECTION 2: SELECTED PROJECTS / WORK -->
-            <section id="work" class="min-h-screen py-24 section-target">
+            <section id="work" class="min-h-screen py-16 sm:py-24 section-target">
                 <div class="max-w-2xl">
                     <div class="flex items-center gap-2 text-xs font-mono text-[#829d38] font-semibold uppercase tracking-widest mb-3">
                         <i class="fa-solid fa-code"></i>
                         <span>Featured Engineering</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-charcoal">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-charcoal">
                         Key Projects & Systems
                     </h2>
-                    <p class="mt-3 text-muted text-base">
+                    <p class="mt-2.5 sm:mt-3 text-muted text-sm sm:text-base">
                         Computer Vision, Human-Computer Interaction, Browser Extensions, and Multi-modal AI pipelines.
                     </p>
 
-                    <div class="mt-10 space-y-6">
+                    <div class="mt-8 sm:mt-10 space-y-5 sm:space-y-6">
                         <!-- Project Card 1: Touchless Hand Gesture -->
-                        <div class="group bg-white rounded-3xl p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                        <div class="group bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start justify-between gap-4">
                                 <span class="text-xs font-mono px-3 py-1 bg-[#829d38]/10 text-[#718a2e] font-semibold rounded-full">🏆 2ND PLACE OVERALL — ELIXIR 2026</span>
                                 <span class="text-xs font-mono text-neutral-400">2026</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-charcoal mt-4 group-hover:text-[#829d38] transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-bold text-charcoal mt-3 sm:mt-4 group-hover:text-[#829d38] transition-colors">
                                 Touchless Hand Gesture Interaction System
                             </h3>
-                            <p class="mt-3 text-neutral-600 text-sm leading-relaxed">
+                            <p class="mt-2.5 sm:mt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
                                 Built a touchless desktop interaction system that translates camera-tracked hand and finger landmarks into real-time cursor navigation and click commands. Implemented an Exponential Moving Average (EMA) smoothing filter to eliminate coordinate jitter, achieving responsive 60 FPS tracking with sub-30ms latency.
                             </p>
-                            <div class="mt-6 flex flex-wrap gap-2 text-xs font-mono text-neutral-500">
+                            <div class="mt-5 sm:mt-6 flex flex-wrap gap-1.5 sm:gap-2 text-xs font-mono text-neutral-500">
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">MediaPipe</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Computer Vision</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">HCI</span>
@@ -292,18 +295,18 @@
                         </div>
 
                         <!-- Project Card 2: Always-Active Media -->
-                        <div class="group bg-white rounded-3xl p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                        <div class="group bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start justify-between gap-4">
                                 <span class="text-xs font-mono px-3 py-1 bg-neutral-100 rounded-full text-muted font-medium">BROWSER EXTENSION</span>
                                 <span class="text-xs font-mono text-neutral-400">2026</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-charcoal mt-4 group-hover:text-[#829d38] transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-bold text-charcoal mt-3 sm:mt-4 group-hover:text-[#829d38] transition-colors">
                                 Always-Active Media (Chrome & Firefox)
                             </h3>
-                            <p class="mt-3 text-neutral-600 text-sm leading-relaxed">
+                            <p class="mt-2.5 sm:mt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
                                 Engineered an open-source browser extension preventing video platforms (Coursera, Udemy, Canvas) from auto-pausing playback on tab switch or window blur. Injected surgical scripts into the MAIN execution context to override <code class="text-xs font-mono bg-neutral-100 px-1 py-0.5 rounded">Document.prototype</code> visibility properties without interfering with site inputs or notifications.
                             </p>
-                            <div class="mt-6 flex flex-wrap gap-2 text-xs font-mono text-neutral-500">
+                            <div class="mt-5 sm:mt-6 flex flex-wrap gap-1.5 sm:gap-2 text-xs font-mono text-neutral-500">
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Manifest V3</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Browser APIs</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">JavaScript</span>
@@ -312,18 +315,18 @@
                         </div>
 
                         <!-- Project Card 3: Interactive 3D & Spatial Design -->
-                        <div class="group bg-white rounded-3xl p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                        <div class="group bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start justify-between gap-4">
                                 <span class="text-xs font-mono px-3 py-1 bg-neutral-100 rounded-full text-muted font-medium">SPATIAL 3D & AI</span>
                                 <span class="text-xs font-mono text-neutral-400">2025 – 2026</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-charcoal mt-4 group-hover:text-[#829d38] transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-bold text-charcoal mt-3 sm:mt-4 group-hover:text-[#829d38] transition-colors">
                                 Interactive 3D & Spatial Design Collection
                             </h3>
-                            <p class="mt-3 text-neutral-600 text-sm leading-relaxed">
+                            <p class="mt-2.5 sm:mt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
                                 Designed and deployed interactive 3D web applications, including a rigged low-poly avatar with live look-at gaze tracking, a spring-tethered physics ID pass, and Arckitek—an interactive TypeScript prototype coupling 3D model exploration with AI-powered contextual explanations via the Google Gemini API.
                             </p>
-                            <div class="mt-6 flex flex-wrap gap-2 text-xs font-mono text-neutral-500">
+                            <div class="mt-5 sm:mt-6 flex flex-wrap gap-1.5 sm:gap-2 text-xs font-mono text-neutral-500">
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Spline 3D</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">WebGL</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">React.js</span>
@@ -333,18 +336,18 @@
                         </div>
 
                         <!-- Project Card 4: Multi-Modal Reasoning Tool -->
-                        <div class="group bg-white rounded-3xl p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                        <div class="group bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-black/5 hover:border-[#829d38]/30 shadow-sm hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start justify-between gap-4">
                                 <span class="text-xs font-mono px-3 py-1 bg-[#829d38]/10 text-[#718a2e] font-semibold rounded-full">🏆 1ST PLACE WINNER — MULTIPLEXER 2026</span>
                                 <span class="text-xs font-mono text-neutral-400">2026</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-charcoal mt-4 group-hover:text-[#829d38] transition-colors">
+                            <h3 class="text-xl sm:text-2xl font-bold text-charcoal mt-3 sm:mt-4 group-hover:text-[#829d38] transition-colors">
                                 Multi-Modal Reasoning & Evaluation Tool
                             </h3>
-                            <p class="mt-3 text-neutral-600 text-sm leading-relaxed">
+                            <p class="mt-2.5 sm:mt-3 text-neutral-600 text-xs sm:text-sm leading-relaxed">
                                 Engineered an automated document reasoning and code evaluation prototype using Google Gemini. Benchmarked structured prompt chains against JSON schema validation across 100+ multi-modal queries, achieving a 94% schema conformance rate on complex unstructured inputs.
                             </p>
-                            <div class="mt-6 flex flex-wrap gap-2 text-xs font-mono text-neutral-500">
+                            <div class="mt-5 sm:mt-6 flex flex-wrap gap-1.5 sm:gap-2 text-xs font-mono text-neutral-500">
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Google Gemini API</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Python</span>
                                 <span class="px-2.5 py-1 bg-neutral-100 rounded-md">Prompt Engineering</span>
@@ -356,27 +359,27 @@
             </section>
 
             <!-- SECTION 3: TECH STACK MATRIX -->
-            <section id="stack" class="min-h-screen py-24 section-target">
+            <section id="stack" class="min-h-screen py-16 sm:py-24 section-target">
                 <div class="max-w-2xl">
                     <div class="flex items-center gap-2 text-xs font-mono text-[#829d38] font-semibold uppercase tracking-widest mb-3">
                         <i class="fa-solid fa-microchip"></i>
                         <span>Technical Matrix</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-charcoal">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-charcoal">
                         Technical Skills & Stack
                     </h2>
-                    <p class="mt-3 text-muted text-base">
+                    <p class="mt-2.5 sm:mt-3 text-muted text-sm sm:text-base">
                         Languages, domain focus, modern frameworks, and developer systems.
                     </p>
 
-                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- Category 1: Languages -->
-                        <div class="p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-4">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-3 sm:mb-4">
                                 <i class="fa-solid fa-code"></i>
                             </div>
-                            <h4 class="font-bold text-charcoal text-base">Programming Languages</h4>
-                            <p class="text-xs text-muted mt-1 mb-4">Core languages across systems & web</p>
+                            <h4 class="font-bold text-charcoal text-sm sm:text-base">Programming Languages</h4>
+                            <p class="text-xs text-muted mt-0.5 sm:mt-1 mb-3 sm:mb-4">Core languages across systems & web</p>
                             <div class="flex flex-wrap gap-1.5 text-xs font-mono text-charcoal">
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">Python</span>
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">TypeScript</span>
@@ -390,12 +393,12 @@
                         </div>
 
                         <!-- Category 2: AI & Domain Focus -->
-                        <div class="p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-4">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-3 sm:mb-4">
                                 <i class="fa-solid fa-brain"></i>
                             </div>
-                            <h4 class="font-bold text-charcoal text-base">AI & Domain Focus</h4>
-                            <p class="text-xs text-muted mt-1 mb-4">Vision, interaction & multimodal AI</p>
+                            <h4 class="font-bold text-charcoal text-sm sm:text-base">AI & Domain Focus</h4>
+                            <p class="text-xs text-muted mt-0.5 sm:mt-1 mb-3 sm:mb-4">Vision, interaction & multimodal AI</p>
                             <div class="flex flex-wrap gap-1.5 text-xs font-mono text-charcoal">
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">Computer Vision</span>
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">HCI</span>
@@ -406,12 +409,12 @@
                         </div>
 
                         <!-- Category 3: Frameworks & Libraries -->
-                        <div class="p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-4">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-3 sm:mb-4">
                                 <i class="fa-solid fa-layer-group"></i>
                             </div>
-                            <h4 class="font-bold text-charcoal text-base">Frameworks & Libraries</h4>
-                            <p class="text-xs text-muted mt-1 mb-4">Spatial graphics & application frameworks</p>
+                            <h4 class="font-bold text-charcoal text-sm sm:text-base">Frameworks & Libraries</h4>
+                            <p class="text-xs text-muted mt-0.5 sm:mt-1 mb-3 sm:mb-4">Spatial graphics & application frameworks</p>
                             <div class="flex flex-wrap gap-1.5 text-xs font-mono text-charcoal">
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">React.js</span>
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">Tailwind CSS</span>
@@ -424,12 +427,12 @@
                         </div>
 
                         <!-- Category 4: Tools & Systems -->
-                        <div class="p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-4">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-charcoal mb-3 sm:mb-4">
                                 <i class="fa-solid fa-terminal"></i>
                             </div>
-                            <h4 class="font-bold text-charcoal text-base">Developer Tools & Systems</h4>
-                            <p class="text-xs text-muted mt-1 mb-4">Version control, shell & databases</p>
+                            <h4 class="font-bold text-charcoal text-sm sm:text-base">Developer Tools & Systems</h4>
+                            <p class="text-xs text-muted mt-0.5 sm:mt-1 mb-3 sm:mb-4">Version control, shell & databases</p>
                             <div class="flex flex-wrap gap-1.5 text-xs font-mono text-charcoal">
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">Git & GitHub</span>
                                 <span class="px-2.5 py-1 bg-neutral-50 rounded border border-neutral-200">Chrome Extensions MV3</span>
@@ -443,23 +446,23 @@
             </section>
 
             <!-- SECTION 4: ABOUT, EDUCATION & LEADERSHIP -->
-            <section id="about" class="min-h-screen py-24 section-target">
+            <section id="about" class="min-h-screen py-16 sm:py-24 section-target">
                 <div class="max-w-2xl">
                     <div class="flex items-center gap-2 text-xs font-mono text-[#829d38] font-semibold uppercase tracking-widest mb-3">
                         <i class="fa-solid fa-user-astronaut"></i>
                         <span>Background & Trajectory</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-charcoal">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-charcoal">
                         Education & Leadership
                     </h2>
                     
-                    <div class="mt-8 space-y-6 text-neutral-700 leading-relaxed">
-                        <div class="p-6 bg-white rounded-3xl border border-black/5 shadow-sm">
+                    <div class="mt-6 sm:mt-8 space-y-5 sm:space-y-6 text-neutral-700 leading-relaxed">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl sm:rounded-3xl border border-black/5 shadow-sm">
                             <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                                <h3 class="text-xl font-bold text-charcoal">St. Joseph's University, Bengaluru</h3>
+                                <h3 class="text-lg sm:text-xl font-bold text-charcoal">St. Joseph's University, Bengaluru</h3>
                                 <span class="text-xs font-mono px-3 py-1 bg-[#829d38]/10 text-[#718a2e] font-semibold rounded-full">CGPA 8.48 / 10.0 (First Class Exemplary)</span>
                             </div>
-                            <p class="text-sm font-medium text-neutral-600">Bachelor of Computer Applications (BCA) • June 2025 – June 2028</p>
+                            <p class="text-xs sm:text-sm font-medium text-neutral-600">Bachelor of Computer Applications (BCA) • June 2025 – June 2028</p>
                             <p class="text-xs text-muted mt-1">Elected Batch Class Representative (BCA 2025–2028, elected June 2026)</p>
                             
                             <!-- Coursework Scores -->
@@ -496,25 +499,25 @@
                     </div>
 
                     <!-- Leadership Roles -->
-                    <h3 class="text-xl font-bold text-charcoal mt-10 mb-4">Leadership & Campus Impact</h3>
+                    <h3 class="text-lg sm:text-xl font-bold text-charcoal mt-8 sm:mt-10 mb-4">Leadership & Campus Impact</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-[#829d38]/10 text-[#718a2e] flex items-center justify-center text-lg mb-3">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#829d38]/10 text-[#718a2e] flex items-center justify-center text-lg mb-3">
                                 <i class="fa-brands fa-google"></i>
                             </div>
                             <h4 class="font-bold text-charcoal text-base">Google Student Ambassador</h4>
-                            <p class="text-xs font-mono text-muted mt-0.5 mb-3">April 2026 – Present • Bengaluru, India</p>
+                            <p class="text-xs font-mono text-muted mt-0.5 mb-2.5">April 2026 – Present • Bengaluru, India</p>
                             <p class="text-xs text-neutral-600 leading-relaxed">
                                 Promote Google developer technologies, Gemini models, and student programs across campus. Produced technical video content reaching 1,200+ views and 90+ engagements; host hands-on Gemini API workshops.
                             </p>
                         </div>
 
-                        <div class="p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg mb-3">
+                        <div class="p-5 sm:p-6 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg mb-3">
                                 <i class="fa-solid fa-users"></i>
                             </div>
                             <h4 class="font-bold text-charcoal text-base">Batch Class Representative</h4>
-                            <p class="text-xs font-mono text-muted mt-0.5 mb-3">June 2026 – Present • SJU Dept of CS</p>
+                            <p class="text-xs font-mono text-muted mt-0.5 mb-2.5">June 2026 – Present • SJU Dept of CS</p>
                             <p class="text-xs text-neutral-600 leading-relaxed">
                                 Elected student liaison representing 60+ BCA students. Primary coordinator between faculty and peers for academic schedules, feedback loops, and departmental tech symposiums.
                             </p>
@@ -522,36 +525,36 @@
                     </div>
 
                     <!-- Honors & Commendations -->
-                    <h3 class="text-xl font-bold text-charcoal mt-10 mb-4">Honors & Certifications</h3>
+                    <h3 class="text-lg sm:text-xl font-bold text-charcoal mt-8 sm:mt-10 mb-4">Honors & Certifications</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="p-5 bg-white rounded-2xl border border-black/5 flex flex-col justify-between">
-                            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm mb-3">
+                        <div class="p-4 sm:p-5 bg-white rounded-2xl border border-black/5 flex flex-col justify-between">
+                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm mb-2.5 sm:mb-3">
                                 <i class="fa-solid fa-trophy"></i>
                             </div>
                             <div>
-                                <h5 class="text-sm font-bold text-charcoal">1st Place Winner</h5>
+                                <h5 class="text-xs sm:text-sm font-bold text-charcoal">1st Place Winner</h5>
                                 <p class="text-xs font-semibold text-[#829d38] mt-0.5">MULTIPLEXER 2026 Fest</p>
                                 <p class="text-[11px] text-muted mt-1">Prompt Eng & Multi-modal GenAI</p>
                             </div>
                         </div>
 
-                        <div class="p-5 bg-white rounded-2xl border border-black/5 flex flex-col justify-between">
-                            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm mb-3">
+                        <div class="p-4 sm:p-5 bg-white rounded-2xl border border-black/5 flex flex-col justify-between">
+                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm mb-2.5 sm:mb-3">
                                 <i class="fa-solid fa-medal"></i>
                             </div>
                             <div>
-                                <h5 class="text-sm font-bold text-charcoal">2nd Place Overall</h5>
+                                <h5 class="text-xs sm:text-sm font-bold text-charcoal">2nd Place Overall</h5>
                                 <p class="text-xs font-semibold text-[#829d38] mt-0.5">Elixir 2026 Open Day</p>
                                 <p class="text-[11px] text-muted mt-1">Touchless Hand Gesture System</p>
                             </div>
                         </div>
 
-                        <div class="p-5 bg-white rounded-2xl border border-black/5 flex flex-col justify-between">
-                            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-sm mb-3">
+                        <div class="p-4 sm:p-5 bg-white rounded-2xl border border-black/5 flex flex-col justify-between">
+                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-sm mb-2.5 sm:mb-3">
                                 <i class="fa-solid fa-certificate"></i>
                             </div>
                             <div>
-                                <h5 class="text-sm font-bold text-charcoal">15/15 Courses Complete</h5>
+                                <h5 class="text-xs sm:text-sm font-bold text-charcoal">15/15 Courses Complete</h5>
                                 <p class="text-xs font-semibold text-[#829d38] mt-0.5">ICT Learnathon</p>
                                 <p class="text-[11px] text-muted mt-1">Google Cloud, MS Learn, Snowflake</p>
                             </div>
@@ -559,7 +562,7 @@
                     </div>
 
                     <!-- Footer Note -->
-                    <div class="mt-16 pt-8 border-t border-black/5 text-xs text-muted flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+                    <div class="mt-12 sm:mt-16 pt-8 pb-16 sm:pb-8 border-t border-black/5 text-xs text-muted flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
                         <div>© 2026 Aaron Vaz. Bengaluru, India.</div>
                         <div class="flex items-center gap-4">
                             <a href="https://github.com/MVYNE06" target="_blank" class="hover:text-charcoal transition-colors">GitHub</a>
@@ -571,188 +574,191 @@
             </section>
         </div>
 
-        <!-- RIGHT COLUMN: STICKY INTERACTIVE STAGE (ID CARD BADGE & LANYARD) -->
-        <div class="w-full lg:w-5/12 h-[550px] lg:h-screen lg:sticky lg:top-0 relative flex justify-center overflow-visible badge-stage z-20">
-            
-            <!-- SVG Spring Lanyard Line connecting Top Anchor to Badge Clasp -->
-            <svg id="lanyard-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-10" style="overflow: visible;">
-                <defs>
-                    <!-- Shadow filter for the lanyard -->
-                    <filter id="lanyard-drop-shadow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feDropShadow dx="3" dy="10" stdDeviation="6" flood-opacity="0.22" />
-                    </filter>
+        <!-- RIGHT COLUMN: DESKTOP STICKY STAGE CONTAINER (lg: only) -->
+        <div id="desktop-stage-container" class="hidden lg:flex lg:w-5/12 lg:h-screen lg:sticky lg:top-0 relative justify-center overflow-visible z-20">
+            <!-- Stage element: Mounted here on desktop, moved to #mobile-hero-stage on mobile -->
+            <div id="badge-stage" class="w-full h-full relative flex justify-center overflow-visible badge-stage">
+                
+                <!-- SVG Spring Lanyard Line connecting Top Anchor to Badge Clasp -->
+                <svg id="lanyard-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-10" style="overflow: visible;">
+                    <defs>
+                        <!-- Shadow filter for the lanyard -->
+                        <filter id="lanyard-drop-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="3" dy="10" stdDeviation="6" flood-opacity="0.22" />
+                        </filter>
+                        
+                        <!-- Lanyard Fabric Pattern with Clover Motifs -->
+                        <pattern id="lanyard-fabric-pattern" width="34" height="34" patternUnits="userSpaceOnUse">
+                            <!-- Olive Green Base -->
+                            <rect width="34" height="34" fill="#586927" />
+                            <!-- Subtle weave lines -->
+                            <line x1="0" y1="0" x2="34" y2="34" stroke="#4a5921" stroke-width="1.5" opacity="0.6"/>
+                            <line x1="34" y1="0" x2="0" y2="34" stroke="#4a5921" stroke-width="1.5" opacity="0.6"/>
+                            <!-- 4-Petal Clover Logo Stamp (matching top logo) -->
+                            <g transform="translate(17, 17) scale(0.65)" fill="#7e9637" opacity="0.9">
+                                <circle cx="-5" cy="-5" r="4.5" />
+                                <circle cx="5" cy="-5" r="4.5" />
+                                <circle cx="-5" cy="5" r="4.5" />
+                                <circle cx="5" cy="5" r="4.5" />
+                                <circle cx="0" cy="0" r="3" fill="#3f4c1c" />
+                            </g>
+                        </pattern>
+                    </defs>
+
+                    <!-- 1. Lanyard Ambient Drop Shadow -->
+                    <path id="lanyard-shadow-path" d="" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="40" stroke-linecap="butt" filter="url(#lanyard-drop-shadow)"/>
                     
-                    <!-- Lanyard Fabric Pattern with Clover Motifs -->
-                    <pattern id="lanyard-fabric-pattern" width="34" height="34" patternUnits="userSpaceOnUse">
-                        <!-- Olive Green Base -->
-                        <rect width="34" height="34" fill="#586927" />
-                        <!-- Subtle weave lines -->
-                        <line x1="0" y1="0" x2="34" y2="34" stroke="#4a5921" stroke-width="1.5" opacity="0.6"/>
-                        <line x1="34" y1="0" x2="0" y2="34" stroke="#4a5921" stroke-width="1.5" opacity="0.6"/>
-                        <!-- 4-Petal Clover Logo Stamp (matching top logo) -->
-                        <g transform="translate(17, 17) scale(0.65)" fill="#7e9637" opacity="0.9">
-                            <circle cx="-5" cy="-5" r="4.5" />
-                            <circle cx="5" cy="-5" r="4.5" />
-                            <circle cx="-5" cy="5" r="4.5" />
-                            <circle cx="5" cy="5" r="4.5" />
-                            <circle cx="0" cy="0" r="3" fill="#3f4c1c" />
-                        </g>
-                    </pattern>
-                </defs>
+                    <!-- 2. Main Lanyard Fabric Strap (Wide & Textured) -->
+                    <path id="lanyard-path" d="" fill="none" stroke="url(#lanyard-fabric-pattern)" stroke-width="34" stroke-linecap="butt"/>
+                    
+                    <!-- 3. Outer Edge Borders for Stitched Ribbon Feel -->
+                    <path id="lanyard-border-left" d="" fill="none" stroke="#44511d" stroke-width="34" stroke-dasharray="0 32 2 0" opacity="0.5"/>
+                    <path id="lanyard-stitch" d="" fill="none" stroke="#87a03b" stroke-width="2" stroke-dasharray="5 5" opacity="0.7"/>
+                </svg>
 
-                <!-- 1. Lanyard Ambient Drop Shadow -->
-                <path id="lanyard-shadow-path" d="" fill="none" stroke="rgba(0,0,0,0.18)" stroke-width="40" stroke-linecap="butt" filter="url(#lanyard-drop-shadow)"/>
-                
-                <!-- 2. Main Lanyard Fabric Strap (Wide & Textured) -->
-                <path id="lanyard-path" d="" fill="none" stroke="url(#lanyard-fabric-pattern)" stroke-width="34" stroke-linecap="butt"/>
-                
-                <!-- 3. Outer Edge Borders for Stitched Ribbon Feel -->
-                <path id="lanyard-border-left" d="" fill="none" stroke="#44511d" stroke-width="34" stroke-dasharray="0 32 2 0" opacity="0.5"/>
-                <path id="lanyard-stitch" d="" fill="none" stroke="#87a03b" stroke-width="2" stroke-dasharray="5 5" opacity="0.7"/>
-            </svg>
-
-            <!-- Top Anchor Point on screen ceiling -->
-            <div id="lanyard-anchor" class="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-3.5 bg-neutral-900 rounded-b-lg z-30 shadow-md border-b border-white/10 flex items-center justify-center">
-                <div class="w-8 h-1 bg-neutral-700 rounded-full"></div>
-            </div>
-
-            <!-- DRAGGABLE / SPRING BADGE HOLDER -->
-            <div id="badge-wrapper" class="absolute can-drag will-change-transform" style="touch-action: none;">
-                
-                <!-- Metal Carabiner / Clasp connecting lanyard to card -->
-                <div class="flex flex-col items-center -mb-2 z-30 relative">
-                    <!-- Metal Crimp Bar connecting fabric strap -->
-                    <div class="w-9 h-3.5 rounded-sm bg-gradient-to-r from-neutral-400 via-neutral-200 to-neutral-400 shadow-sm border border-neutral-500/30 flex items-center justify-center">
-                        <div class="w-6 h-0.5 bg-neutral-600/60 rounded-full"></div>
-                    </div>
-                    <!-- Metal Swivel Ring -->
-                    <div class="w-7 h-7 rounded-full border-[3px] border-neutral-400 bg-neutral-100 shadow-sm -mt-1"></div>
-                    <!-- Metal Clasp Body -->
-                    <div class="w-4 h-9 -mt-2 rounded-sm metal-clasp relative flex flex-col items-center justify-end pb-1 shadow-md">
-                        <div class="w-2.5 h-1 bg-neutral-700 rounded-full"></div>
-                    </div>
+                <!-- Top Anchor Point on ceiling/container top -->
+                <div id="lanyard-anchor" class="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-3.5 bg-neutral-900 rounded-b-lg z-30 shadow-md border-b border-white/10 flex items-center justify-center">
+                    <div class="w-8 h-1 bg-neutral-700 rounded-full"></div>
                 </div>
 
-                <!-- 3D FLIPPABLE ID BADGE CARD -->
-                <div id="badge-card" class="badge-card-inner w-[295px] sm:w-[320px] h-[440px] sm:h-[465px] relative rounded-3xl badge-shadow bg-white cursor-grab">
+                <!-- DRAGGABLE / SPRING BADGE HOLDER -->
+                <div id="badge-wrapper" class="absolute can-drag will-change-transform" style="touch-action: none;">
                     
-                    <!-- FRONT FACE -->
-                    <div class="badge-face absolute inset-0 w-full h-full rounded-3xl p-5 bg-white flex flex-col justify-between overflow-hidden border border-black/5">
-                        
-                        <!-- Top Slot & Header -->
-                        <div class="flex flex-col items-center text-center pt-0.5">
-                            <!-- Card Slot Hole for Clip -->
-                            <div class="w-11 h-2 bg-neutral-200 rounded-full mb-2.5 shadow-inner"></div>
-                            
-                            <!-- Card Name -->
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-charcoal tracking-tight leading-tight">Aaron Vaz</h3>
-                            <p class="text-[11px] font-mono text-muted uppercase tracking-widest mt-0.5 mb-1">St. Joseph's University</p>
+                    <!-- Metal Carabiner / Clasp connecting lanyard to card -->
+                    <div class="flex flex-col items-center -mb-2 z-30 relative">
+                        <!-- Metal Crimp Bar connecting fabric strap -->
+                        <div class="w-9 h-3.5 rounded-sm bg-gradient-to-r from-neutral-400 via-neutral-200 to-neutral-400 shadow-sm border border-neutral-500/30 flex items-center justify-center">
+                            <div class="w-6 h-0.5 bg-neutral-600/60 rounded-full"></div>
                         </div>
-
-                        <!-- PHOTO FRAME: EMBEDDED SPLINE 3D HEAD MODEL -->
-                        <div class="relative w-full h-[195px] sm:h-[220px] my-1 bg-gradient-to-b from-[#f4f5f1] to-[#e8ebe3] rounded-2xl overflow-hidden border border-black/5 flex items-center justify-center group shadow-inner">
-                            
-                            <!-- Live Spline Viewer Component (Pointer events disabled on canvas so entire card is effortlessly draggable) -->
-                            <spline-viewer 
-                                id="avatar-spline" 
-                                events-target="global" 
-                                loading-anim-type="spinner-small-dark" 
-                                url="https://prod.spline.design/Z8dPfClUQsTwMCQC/scene.splinecode">
-                            </spline-viewer>
-
-                            <!-- Subtle Vignette / Lighting Overlay -->
-                            <div class="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-black/5"></div>
-                            
-                            <!-- 3D Look-At Mouse Tracker Pill -->
-                            <div class="absolute bottom-2 right-2 px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-mono text-white flex items-center gap-1.5 pointer-events-none">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#829d38] animate-ping"></span>
-                                <span>3D LOOK-AT</span>
-                            </div>
-                        </div>
-
-                        <!-- Bottom Badge Info (Spacious & Distinct) -->
-                        <div class="flex flex-col items-center text-center pt-1.5 pb-0.5">
-                            <span class="text-base sm:text-lg font-bold text-charcoal leading-snug">Creative Developer</span>
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-[10px] font-mono text-muted tracking-widest uppercase">BENGALURU, IN</span>
-                                <span class="text-muted/60 text-[9px]">•</span>
-                                <span class="text-[10px] font-mono text-[#829d38] font-bold tracking-widest uppercase">CLASS REP</span>
-                            </div>
+                        <!-- Metal Swivel Ring -->
+                        <div class="w-7 h-7 rounded-full border-[3px] border-neutral-400 bg-neutral-100 shadow-sm -mt-1"></div>
+                        <!-- Metal Clasp Body -->
+                        <div class="w-4 h-9 -mt-2 rounded-sm metal-clasp relative flex flex-col items-center justify-end pb-1 shadow-md">
+                            <div class="w-2.5 h-1 bg-neutral-700 rounded-full"></div>
                         </div>
                     </div>
 
-                    <!-- BACK FACE (REVEALED ON 3D FLIP) -->
-                    <div class="badge-face badge-back absolute inset-0 w-full h-full rounded-3xl p-5 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white flex flex-col justify-between overflow-hidden border border-neutral-800 shadow-2xl">
+                    <!-- 3D FLIPPABLE ID BADGE CARD (Responsive Width & Height) -->
+                    <div id="badge-card" class="badge-card-inner w-[270px] sm:w-[320px] h-[395px] sm:h-[465px] relative rounded-3xl badge-shadow bg-white cursor-grab">
                         
-                        <!-- Top Slot Hole -->
-                        <div class="flex flex-col items-center text-center">
-                            <div class="w-12 h-2.5 bg-neutral-800 rounded-full mb-3 shadow-inner"></div>
-                            <span class="text-[11px] font-mono text-[#829d38] font-semibold uppercase tracking-widest">ACCESS VERIFIED</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">AARON VAZ</h4>
-                        </div>
+                        <!-- FRONT FACE -->
+                        <div class="badge-face absolute inset-0 w-full h-full rounded-3xl p-4 sm:p-5 bg-white flex flex-col justify-between overflow-hidden border border-black/5">
+                            
+                            <!-- Top Slot & Header -->
+                            <div class="flex flex-col items-center text-center pt-0.5">
+                                <!-- Card Slot Hole for Clip -->
+                                <div class="w-10 h-1.5 sm:w-11 sm:h-2 bg-neutral-200 rounded-full mb-2 sm:mb-2.5 shadow-inner"></div>
+                                
+                                <!-- Card Name -->
+                                <h3 class="text-lg sm:text-2xl font-extrabold text-charcoal tracking-tight leading-tight">Aaron Vaz</h3>
+                                <p class="text-[10px] sm:text-[11px] font-mono text-muted uppercase tracking-widest mt-0.5 mb-1">St. Joseph's University</p>
+                            </div>
 
-                        <!-- Credentials & Contact Body -->
-                        <div class="space-y-3.5 my-auto px-1">
-                            <!-- Student ID Matrix -->
-                            <div class="p-3 bg-white/5 rounded-xl border border-white/10 text-xs font-mono space-y-1.5">
-                                <div class="flex justify-between text-neutral-400">
-                                    <span>INSTITUTE:</span>
-                                    <span class="text-white font-medium">SJU BENGALURU</span>
-                                </div>
-                                <div class="flex justify-between text-neutral-400">
-                                    <span>PROGRAM:</span>
-                                    <span class="text-white font-medium">BCA (CGPA 8.48)</span>
-                                </div>
-                                <div class="flex justify-between text-neutral-400">
-                                    <span>ROLES:</span>
-                                    <span class="text-[#829d38] font-semibold">AMBASSADOR & REP</span>
+                            <!-- PHOTO FRAME: EMBEDDED SPLINE 3D HEAD MODEL -->
+                            <div class="relative w-full h-[170px] sm:h-[220px] my-1 bg-gradient-to-b from-[#f4f5f1] to-[#e8ebe3] rounded-2xl overflow-hidden border border-black/5 flex items-center justify-center group shadow-inner">
+                                
+                                <!-- Live Spline Viewer Component -->
+                                <spline-viewer 
+                                    id="avatar-spline" 
+                                    events-target="global" 
+                                    loading-anim-type="spinner-small-dark" 
+                                    url="https://prod.spline.design/Z8dPfClUQsTwMCQC/scene.splinecode">
+                                </spline-viewer>
+
+                                <!-- Subtle Vignette / Lighting Overlay -->
+                                <div class="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-black/5"></div>
+                                
+                                <!-- 3D Look-At Mouse Tracker Pill -->
+                                <div class="absolute bottom-2 right-2 px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/60 backdrop-blur-md rounded-full text-[9px] sm:text-[10px] font-mono text-white flex items-center gap-1.5 pointer-events-none">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#829d38] animate-ping"></span>
+                                    <span>3D LOOK-AT</span>
                                 </div>
                             </div>
 
-                            <!-- Stylized QR Code / Scanner Simulation -->
-                            <div class="flex items-center justify-center py-1">
-                                <div class="p-2.5 bg-white rounded-xl shadow-md">
-                                    <!-- Crisp SVG QR Pattern -->
-                                    <svg class="w-16 h-16 text-neutral-900" viewBox="0 0 100 100" fill="currentColor">
-                                        <rect x="0" y="0" width="30" height="30" rx="4"/>
-                                        <rect x="6" y="6" width="18" height="18" fill="white" rx="2"/>
-                                        <rect x="10" y="10" width="10" height="10" rx="1"/>
-
-                                        <rect x="70" y="0" width="30" height="30" rx="4"/>
-                                        <rect x="76" y="6" width="18" height="18" fill="white" rx="2"/>
-                                        <rect x="80" y="10" width="10" height="10" rx="1"/>
-
-                                        <rect x="0" y="70" width="30" height="30" rx="4"/>
-                                        <rect x="6" y="76" width="18" height="18" fill="white" rx="2"/>
-                                        <rect x="10" y="80" width="10" height="10" rx="1"/>
-
-                                        <rect x="40" y="10" width="20" height="8"/>
-                                        <rect x="40" y="30" width="10" height="20"/>
-                                        <rect x="60" y="40" width="30" height="10"/>
-                                        <rect x="40" y="65" width="20" height="25"/>
-                                        <rect x="70" y="70" width="20" height="10"/>
-                                        <rect x="80" y="85" width="10" height="10"/>
-                                    </svg>
+                            <!-- Bottom Badge Info (Spacious & Distinct) -->
+                            <div class="flex flex-col items-center text-center pt-1 pb-0.5">
+                                <span class="text-sm sm:text-lg font-bold text-charcoal leading-snug">Creative Developer</span>
+                                <div class="flex items-center gap-2 mt-0.5 sm:mt-1">
+                                    <span class="text-[9px] sm:text-[10px] font-mono text-muted tracking-widest uppercase">BENGALURU, IN</span>
+                                    <span class="text-muted/60 text-[8px] sm:text-[9px]">•</span>
+                                    <span class="text-[9px] sm:text-[10px] font-mono text-[#829d38] font-bold tracking-widest uppercase">CLASS REP</span>
                                 </div>
-                            </div>
-
-                            <!-- Links -->
-                            <div class="flex justify-center gap-2 text-xs font-mono">
-                                <a href="https://github.com/MVYNE06" target="_blank" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                                    <i class="fa-brands fa-github mr-1"></i> GitHub
-                                </a>
-                                <a href="https://www.linkedin.com/in/aaron-vaz-m06" target="_blank" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                                    <i class="fa-brands fa-linkedin mr-1"></i> LinkedIn
-                                </a>
-                                <a href="mailto:aaronvaz2006@gmail.com" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
-                                    <i class="fa-solid fa-envelope mr-1"></i> Email
-                                </a>
                             </div>
                         </div>
 
-                        <!-- Flip Back Note -->
-                        <div class="text-center pt-2 border-t border-white/10">
-                            <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">TAP AGAIN TO FLIP</span>
+                        <!-- BACK FACE (REVEALED ON 3D FLIP) -->
+                        <div class="badge-face badge-back absolute inset-0 w-full h-full rounded-3xl p-4 sm:p-5 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white flex flex-col justify-between overflow-hidden border border-neutral-800 shadow-2xl">
+                            
+                            <!-- Top Slot Hole -->
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-10 h-1.5 sm:w-12 sm:h-2.5 bg-neutral-800 rounded-full mb-2 sm:mb-3 shadow-inner"></div>
+                                <span class="text-[10px] sm:text-[11px] font-mono text-[#829d38] font-semibold uppercase tracking-widest">ACCESS VERIFIED</span>
+                                <h4 class="text-base sm:text-lg font-bold text-white mt-0.5">AARON VAZ</h4>
+                            </div>
+
+                            <!-- Credentials & Contact Body -->
+                            <div class="space-y-2.5 sm:space-y-3.5 my-auto px-1">
+                                <!-- Student ID Matrix -->
+                                <div class="p-2.5 sm:p-3 bg-white/5 rounded-xl border border-white/10 text-[10px] sm:text-xs font-mono space-y-1 sm:space-y-1.5">
+                                    <div class="flex justify-between text-neutral-400">
+                                        <span>INSTITUTE:</span>
+                                        <span class="text-white font-medium">SJU BENGALURU</span>
+                                    </div>
+                                    <div class="flex justify-between text-neutral-400">
+                                        <span>PROGRAM:</span>
+                                        <span class="text-white font-medium">BCA (CGPA 8.48)</span>
+                                    </div>
+                                    <div class="flex justify-between text-neutral-400">
+                                        <span>ROLES:</span>
+                                        <span class="text-[#829d38] font-semibold">AMBASSADOR & REP</span>
+                                    </div>
+                                </div>
+
+                                <!-- Stylized QR Code / Scanner Simulation -->
+                                <div class="flex items-center justify-center py-0.5 sm:py-1">
+                                    <div class="p-2 sm:p-2.5 bg-white rounded-xl shadow-md">
+                                        <!-- Crisp SVG QR Pattern -->
+                                        <svg class="w-14 h-14 sm:w-16 sm:h-16 text-neutral-900" viewBox="0 0 100 100" fill="currentColor">
+                                            <rect x="0" y="0" width="30" height="30" rx="4"/>
+                                            <rect x="6" y="6" width="18" height="18" fill="white" rx="2"/>
+                                            <rect x="10" y="10" width="10" height="10" rx="1"/>
+
+                                            <rect x="70" y="0" width="30" height="30" rx="4"/>
+                                            <rect x="76" y="6" width="18" height="18" fill="white" rx="2"/>
+                                            <rect x="80" y="10" width="10" height="10" rx="1"/>
+
+                                            <rect x="0" y="70" width="30" height="30" rx="4"/>
+                                            <rect x="6" y="76" width="18" height="18" fill="white" rx="2"/>
+                                            <rect x="10" y="80" width="10" height="10" rx="1"/>
+
+                                            <rect x="40" y="10" width="20" height="8"/>
+                                            <rect x="40" y="30" width="10" height="20"/>
+                                            <rect x="60" y="40" width="30" height="10"/>
+                                            <rect x="40" y="65" width="20" height="25"/>
+                                            <rect x="70" y="70" width="20" height="10"/>
+                                            <rect x="80" y="85" width="10" height="10"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Links -->
+                                <div class="flex justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-mono">
+                                    <a href="https://github.com/MVYNE06" target="_blank" class="px-2 py-1 sm:px-2.5 sm:py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+                                        <i class="fa-brands fa-github mr-1"></i> GitHub
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/aaron-vaz-m06" target="_blank" class="px-2 py-1 sm:px-2.5 sm:py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+                                        <i class="fa-brands fa-linkedin mr-1"></i> LinkedIn
+                                    </a>
+                                    <a href="mailto:aaronvaz2006@gmail.com" class="px-2 py-1 sm:px-2.5 sm:py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+                                        <i class="fa-solid fa-envelope mr-1"></i> Email
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Flip Back Note -->
+                            <div class="text-center pt-1.5 sm:pt-2 border-t border-white/10">
+                                <span class="text-[9px] sm:text-[10px] font-mono text-neutral-400 uppercase tracking-widest">TAP AGAIN TO FLIP</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -761,12 +767,12 @@
     </main>
 
     <!-- FLOATING BOTTOM DOCK NAVIGATION (matching reel) -->
-    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
-        <nav class="dock-glass px-3 py-2 rounded-full flex items-center gap-1 sm:gap-2 text-xs font-semibold tracking-wider uppercase text-neutral-300">
-            <a href="#top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200 active-dock" data-target="hero">HOME</a>
-            <a href="#work" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200" data-target="work">WORK</a>
-            <a href="#stack" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200" data-target="stack">STACK</a>
-            <a href="#about" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200" data-target="about">ABOUT</a>
+    <div class="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50">
+        <nav class="dock-glass px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full flex items-center gap-1 sm:gap-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-neutral-300">
+            <a href="#top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="dock-link px-3 py-1.5 sm:px-4 sm:py-2 rounded-full hover:text-white transition-all duration-200 active-dock" data-target="hero">HOME</a>
+            <a href="#work" class="dock-link px-3 py-1.5 sm:px-4 sm:py-2 rounded-full hover:text-white transition-all duration-200" data-target="work">WORK</a>
+            <a href="#stack" class="dock-link px-3 py-1.5 sm:px-4 sm:py-2 rounded-full hover:text-white transition-all duration-200" data-target="stack">STACK</a>
+            <a href="#about" class="dock-link px-3 py-1.5 sm:px-4 sm:py-2 rounded-full hover:text-white transition-all duration-200" data-target="about">ABOUT</a>
         </nav>
     </div>
 
@@ -836,13 +842,37 @@
             setTimeout(cleanLogo, 3000);
         }
 
+        // Dynamic Viewport Stage Placement (Mobile Hero vs Desktop Sticky Sidebar)
+        const stageEl = document.getElementById('badge-stage');
+        const desktopContainer = document.getElementById('desktop-stage-container');
+        const mobileContainer = document.getElementById('mobile-hero-stage');
+
+        function syncStagePlacement() {
+            const isDesktop = window.innerWidth >= 1024;
+            if (!stageEl || !desktopContainer || !mobileContainer) return;
+
+            if (isDesktop) {
+                if (stageEl.parentElement !== desktopContainer) {
+                    desktopContainer.appendChild(stageEl);
+                    stageEl.classList.remove('h-[425px]');
+                    stageEl.classList.add('h-full');
+                }
+            } else {
+                if (stageEl.parentElement !== mobileContainer) {
+                    mobileContainer.appendChild(stageEl);
+                    stageEl.classList.remove('h-full');
+                    stageEl.classList.add('h-[425px]');
+                }
+            }
+        }
+
         // Physics State
         let restingX = 0;
-        let restingY = 75; // Raised slightly so bottom tags & text are fully visible above dock
+        let restingY = window.innerWidth >= 1024 ? 75 : 28;
         let posX = 0;
         let posY = -540; // Start completely hidden above ceiling for smooth, elegant drop entrance
         let targetX = 0;
-        let targetY = 75;
+        let targetY = restingY;
         let velX = 0;
         let velY = 0;
         let rot = 0;
@@ -866,19 +896,24 @@
         let hasDropped = false;
 
         function updateRestingPosition() {
-            // Center in right column container
-            const stage = badgeWrapper.parentElement;
-            if (!stage) return;
+            const isDesktop = window.innerWidth >= 1024;
             restingX = 0; // Center
-            // 75px gives ~75px of visible green clover ribbon while keeping the bottom text safely above the dock
-            restingY = window.innerWidth >= 1024 ? 75 : 30;
+            // 75px on desktop stage, 28px inside mobile hero stage
+            restingY = isDesktop ? 75 : 28;
             targetX = restingX;
             if (!isEntering) {
                 targetY = restingY;
             }
         }
 
-        window.addEventListener('resize', updateRestingPosition);
+        function handleResize() {
+            syncStagePlacement();
+            updateRestingPosition();
+            updateLanyardCurve();
+        }
+
+        window.addEventListener('resize', handleResize);
+        syncStagePlacement();
         updateRestingPosition();
 
         // Robust Pointer Events for Full Badge Dragging
