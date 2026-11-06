@@ -155,24 +155,44 @@
             cursor: grab;
         }
 
+        /* Deterministic Badge Positioning from Ceiling */
+        #badge-wrapper {
+            top: 0;
+            left: 50%;
+            margin-left: -147.5px;
+        }
+        @media (min-width: 640px) {
+            #badge-wrapper {
+                margin-left: -160px;
+            }
+        }
+
+        /* Scroll Padding & Targets */
+        html {
+            scroll-padding-top: 80px;
+        }
+        .section-target {
+            scroll-margin-top: 80px;
+        }
+
         /* Frosted Navbar */
         .frosted-header {
-            background-color: rgba(251, 251, 250, 0.92);
+            background-color: rgba(251, 251, 250, 0.94);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
-<body class="relative min-h-screen">
+<body id="top" class="relative min-h-screen">
 
-    <!-- TOP HEADER BAR: FIXED FROSTED GLASS TO PREVENT TEXT MERGING -->
-    <header class="fixed top-0 left-0 w-full z-40 frosted-header px-6 sm:px-12 py-3.5 flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-        <!-- Logo / Icon -->
-        <a href="#hero" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-2xl bg-[#829d38] flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+    <!-- TOP HEADER BAR: FIXED ULTRA-SLIM FROSTED GLASS -->
+    <header class="fixed top-0 left-0 w-full z-40 frosted-header px-5 sm:px-10 py-2 flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+        <!-- Logo / Icon (Smooth scroll to top on click without clipping) -->
+        <a href="#top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="flex items-center gap-2 sm:gap-2.5 group cursor-pointer" title="Back to top">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#829d38] flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                 <!-- Clover / 4-petal floral motif matching the reel -->
-                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-current" viewBox="0 0 24 24">
                     <circle cx="8" cy="8" r="4" opacity="0.95"/>
                     <circle cx="16" cy="8" r="4" opacity="0.95"/>
                     <circle cx="8" cy="16" r="4" opacity="0.95"/>
@@ -181,14 +201,14 @@
                 </svg>
             </div>
             <div class="flex flex-col">
-                <span class="text-sm font-bold tracking-tight text-charcoal">Aaron Vaz</span>
-                <span class="text-[11px] font-mono text-muted uppercase tracking-wider">Portfolio '26</span>
+                <span class="text-xs sm:text-sm font-bold tracking-tight text-charcoal leading-none">Aaron Vaz</span>
+                <span class="text-[9px] sm:text-[10px] font-mono text-muted uppercase tracking-wider mt-0.5">Portfolio '26</span>
             </div>
         </a>
 
-        <!-- Status Pill (Safely positioned on right) -->
-        <div class="hidden sm:flex items-center gap-2.5 px-4 py-2 bg-white/90 border border-black/5 rounded-full shadow-sm text-xs text-charcoal">
-            <span class="w-2 h-2 rounded-full bg-[#829d38] animate-pulse"></span>
+        <!-- Status Pill (Slim & cleanly aligned) -->
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-white/90 border border-black/5 rounded-full shadow-sm text-[10px] sm:text-[11px] text-charcoal">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#829d38] animate-pulse"></span>
             <span class="font-medium">Google Student Ambassador</span>
             <span class="text-black/20">|</span>
             <span class="text-muted">St. Joseph's University</span>
@@ -199,10 +219,10 @@
     <main class="w-full min-h-screen flex flex-col lg:flex-row relative">
         
         <!-- LEFT COLUMN: SCROLLABLE PORTFOLIO STORY (w-full lg:w-7/12) -->
-        <div class="w-full lg:w-7/12 min-h-screen px-6 sm:px-12 lg:px-16 xl:px-20 pt-36 sm:pt-40 pb-32 z-10 flex flex-col">
+        <div class="w-full lg:w-7/12 min-h-screen px-6 sm:px-12 lg:px-16 xl:px-20 pt-28 sm:pt-32 pb-32 z-10 flex flex-col">
             
             <!-- SECTION 1: HERO -->
-            <section id="hero" class="min-h-[75vh] flex flex-col justify-start pt-4 sm:pt-8 section-target">
+            <section id="hero" class="min-h-[75vh] flex flex-col justify-start pt-2 sm:pt-4 section-target" style="scroll-margin-top: 140px;">
                 <div class="max-w-xl">
                     <!-- Big Editorial Headline -->
                     <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-charcoal leading-[1.14]">
@@ -552,7 +572,7 @@
         </div>
 
         <!-- RIGHT COLUMN: STICKY INTERACTIVE STAGE (ID CARD BADGE & LANYARD) -->
-        <div class="w-full lg:w-5/12 h-[550px] lg:h-screen lg:sticky lg:top-0 relative flex items-center justify-center overflow-visible badge-stage z-20">
+        <div class="w-full lg:w-5/12 h-[550px] lg:h-screen lg:sticky lg:top-0 relative flex justify-center overflow-visible badge-stage z-20">
             
             <!-- SVG Spring Lanyard Line connecting Top Anchor to Badge Clasp -->
             <svg id="lanyard-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-10" style="overflow: visible;">
@@ -614,23 +634,23 @@
                 </div>
 
                 <!-- 3D FLIPPABLE ID BADGE CARD -->
-                <div id="badge-card" class="badge-card-inner w-[300px] sm:w-[335px] h-[490px] sm:h-[535px] relative rounded-3xl badge-shadow bg-white cursor-grab">
+                <div id="badge-card" class="badge-card-inner w-[295px] sm:w-[320px] h-[440px] sm:h-[465px] relative rounded-3xl badge-shadow bg-white cursor-grab">
                     
                     <!-- FRONT FACE -->
-                    <div class="badge-face absolute inset-0 w-full h-full rounded-3xl p-6 sm:p-7 bg-white flex flex-col justify-between overflow-hidden border border-black/5">
+                    <div class="badge-face absolute inset-0 w-full h-full rounded-3xl p-5 bg-white flex flex-col justify-between overflow-hidden border border-black/5">
                         
                         <!-- Top Slot & Header -->
-                        <div class="flex flex-col items-center text-center pt-1">
+                        <div class="flex flex-col items-center text-center pt-0.5">
                             <!-- Card Slot Hole for Clip -->
-                            <div class="w-12 h-2.5 bg-neutral-200 rounded-full mb-4 shadow-inner"></div>
+                            <div class="w-11 h-2 bg-neutral-200 rounded-full mb-2.5 shadow-inner"></div>
                             
                             <!-- Card Name -->
-                            <h3 class="text-2xl sm:text-[26px] font-extrabold text-charcoal tracking-tight">Aaron Vaz</h3>
-                            <p class="text-xs font-mono text-muted uppercase tracking-widest mt-1 mb-2">St. Joseph's University</p>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-charcoal tracking-tight leading-tight">Aaron Vaz</h3>
+                            <p class="text-[11px] font-mono text-muted uppercase tracking-widest mt-0.5 mb-1">St. Joseph's University</p>
                         </div>
 
                         <!-- PHOTO FRAME: EMBEDDED SPLINE 3D HEAD MODEL -->
-                        <div class="relative w-full h-[225px] sm:h-[255px] my-1 bg-gradient-to-b from-[#f4f5f1] to-[#e8ebe3] rounded-2xl overflow-hidden border border-black/5 flex items-center justify-center group shadow-inner">
+                        <div class="relative w-full h-[195px] sm:h-[220px] my-1 bg-gradient-to-b from-[#f4f5f1] to-[#e8ebe3] rounded-2xl overflow-hidden border border-black/5 flex items-center justify-center group shadow-inner">
                             
                             <!-- Live Spline Viewer Component (Pointer events disabled on canvas so entire card is effortlessly draggable) -->
                             <spline-viewer 
@@ -644,37 +664,37 @@
                             <div class="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-black/5"></div>
                             
                             <!-- 3D Look-At Mouse Tracker Pill -->
-                            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-mono text-white flex items-center gap-1.5 pointer-events-none">
+                            <div class="absolute bottom-2 right-2 px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-mono text-white flex items-center gap-1.5 pointer-events-none">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#829d38] animate-ping"></span>
                                 <span>3D LOOK-AT</span>
                             </div>
                         </div>
 
                         <!-- Bottom Badge Info (Spacious & Distinct) -->
-                        <div class="flex flex-col items-center text-center pt-3 pb-1">
-                            <span class="text-lg font-bold text-charcoal leading-snug">Creative Developer</span>
-                            <div class="flex items-center gap-2.5 mt-1.5">
-                                <span class="text-[11px] font-mono text-muted tracking-widest uppercase">BENGALURU, IN</span>
-                                <span class="text-muted/60 text-[10px]">•</span>
-                                <span class="text-[11px] font-mono text-[#829d38] font-bold tracking-widest uppercase">CLASS REP</span>
+                        <div class="flex flex-col items-center text-center pt-1.5 pb-0.5">
+                            <span class="text-base sm:text-lg font-bold text-charcoal leading-snug">Creative Developer</span>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-[10px] font-mono text-muted tracking-widest uppercase">BENGALURU, IN</span>
+                                <span class="text-muted/60 text-[9px]">•</span>
+                                <span class="text-[10px] font-mono text-[#829d38] font-bold tracking-widest uppercase">CLASS REP</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- BACK FACE (REVEALED ON 3D FLIP) -->
-                    <div class="badge-face badge-back absolute inset-0 w-full h-full rounded-3xl p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white flex flex-col justify-between overflow-hidden border border-neutral-800 shadow-2xl">
+                    <div class="badge-face badge-back absolute inset-0 w-full h-full rounded-3xl p-5 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white flex flex-col justify-between overflow-hidden border border-neutral-800 shadow-2xl">
                         
                         <!-- Top Slot Hole -->
                         <div class="flex flex-col items-center text-center">
-                            <div class="w-12 h-2.5 bg-neutral-800 rounded-full mb-4 shadow-inner"></div>
+                            <div class="w-12 h-2.5 bg-neutral-800 rounded-full mb-3 shadow-inner"></div>
                             <span class="text-[11px] font-mono text-[#829d38] font-semibold uppercase tracking-widest">ACCESS VERIFIED</span>
-                            <h4 class="text-lg font-bold text-white mt-1">AARON VAZ</h4>
+                            <h4 class="text-lg font-bold text-white mt-0.5">AARON VAZ</h4>
                         </div>
 
                         <!-- Credentials & Contact Body -->
-                        <div class="space-y-4 my-auto px-2">
+                        <div class="space-y-3.5 my-auto px-1">
                             <!-- Student ID Matrix -->
-                            <div class="p-3.5 bg-white/5 rounded-xl border border-white/10 text-xs font-mono space-y-1.5">
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/10 text-xs font-mono space-y-1.5">
                                 <div class="flex justify-between text-neutral-400">
                                     <span>INSTITUTE:</span>
                                     <span class="text-white font-medium">SJU BENGALURU</span>
@@ -690,10 +710,10 @@
                             </div>
 
                             <!-- Stylized QR Code / Scanner Simulation -->
-                            <div class="flex items-center justify-center py-2">
-                                <div class="p-3 bg-white rounded-xl shadow-md">
+                            <div class="flex items-center justify-center py-1">
+                                <div class="p-2.5 bg-white rounded-xl shadow-md">
                                     <!-- Crisp SVG QR Pattern -->
-                                    <svg class="w-20 h-20 text-neutral-900" viewBox="0 0 100 100" fill="currentColor">
+                                    <svg class="w-16 h-16 text-neutral-900" viewBox="0 0 100 100" fill="currentColor">
                                         <rect x="0" y="0" width="30" height="30" rx="4"/>
                                         <rect x="6" y="6" width="18" height="18" fill="white" rx="2"/>
                                         <rect x="10" y="10" width="10" height="10" rx="1"/>
@@ -717,14 +737,14 @@
                             </div>
 
                             <!-- Links -->
-                            <div class="flex justify-center gap-2.5 text-xs font-mono">
-                                <a href="https://github.com/MVYNE06" target="_blank" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+                            <div class="flex justify-center gap-2 text-xs font-mono">
+                                <a href="https://github.com/MVYNE06" target="_blank" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
                                     <i class="fa-brands fa-github mr-1"></i> GitHub
                                 </a>
-                                <a href="https://www.linkedin.com/in/aaron-vaz-m06" target="_blank" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+                                <a href="https://www.linkedin.com/in/aaron-vaz-m06" target="_blank" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
                                     <i class="fa-brands fa-linkedin mr-1"></i> LinkedIn
                                 </a>
-                                <a href="mailto:aaronvaz2006@gmail.com" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
+                                <a href="mailto:aaronvaz2006@gmail.com" class="px-2.5 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors">
                                     <i class="fa-solid fa-envelope mr-1"></i> Email
                                 </a>
                             </div>
@@ -743,7 +763,7 @@
     <!-- FLOATING BOTTOM DOCK NAVIGATION (matching reel) -->
     <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
         <nav class="dock-glass px-3 py-2 rounded-full flex items-center gap-1 sm:gap-2 text-xs font-semibold tracking-wider uppercase text-neutral-300">
-            <a href="#hero" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200 active-dock" data-target="hero">HOME</a>
+            <a href="#top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200 active-dock" data-target="hero">HOME</a>
             <a href="#work" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200" data-target="work">WORK</a>
             <a href="#stack" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200" data-target="stack">STACK</a>
             <a href="#about" class="dock-link px-4 py-2 rounded-full hover:text-white transition-all duration-200" data-target="about">ABOUT</a>
@@ -818,11 +838,11 @@
 
         // Physics State
         let restingX = 0;
-        let restingY = 88;
+        let restingY = 75; // Raised slightly so bottom tags & text are fully visible above dock
         let posX = 0;
-        let posY = -340; // Start high for drop entrance
+        let posY = -540; // Start completely hidden above ceiling for smooth, elegant drop entrance
         let targetX = 0;
-        let targetY = 88;
+        let targetY = 75;
         let velX = 0;
         let velY = 0;
         let rot = 0;
@@ -830,6 +850,7 @@
 
         // Interaction & Velocity Tracking
         let isDragging = false;
+        let isEntering = true; // Smooth entrance animation loop
         let dragStartX = 0;
         let dragStartY = 0;
         let dragOriginX = 0;
@@ -849,10 +870,10 @@
             const stage = badgeWrapper.parentElement;
             if (!stage) return;
             restingX = 0; // Center
-            // Lowered resting position so green lanyard strap is prominently visible
-            restingY = window.innerWidth >= 1024 ? 88 : 36;
-            if (!hasDropped) {
-                targetX = restingX;
+            // 75px gives ~75px of visible green clover ribbon while keeping the bottom text safely above the dock
+            restingY = window.innerWidth >= 1024 ? 75 : 30;
+            targetX = restingX;
+            if (!isEntering) {
                 targetY = restingY;
             }
         }
@@ -860,19 +881,12 @@
         window.addEventListener('resize', updateRestingPosition);
         updateRestingPosition();
 
-        // Initial drop-in animation trigger (realistic bounce)
-        setTimeout(() => {
-            hasDropped = true;
-            targetX = restingX;
-            targetY = restingY;
-            velY = 22; // High initial drop momentum
-        }, 200);
-
         // Robust Pointer Events for Full Badge Dragging
         badgeWrapper.addEventListener('pointerdown', (e) => {
             // Allow clicking links on back of badge
             if (e.target.closest('a') || e.target.closest('button')) return;
 
+            isEntering = false; // User touch immediately overrides entrance
             isDragging = true;
             badgeWrapper.setPointerCapture(e.pointerId);
             badgeWrapper.classList.add('is-dragging');
@@ -947,9 +961,31 @@
             badgeCard.classList.toggle('is-flipped');
         }
 
-        // High-Fidelity Physics Loop (Spring + Pendulum Simulation)
+        // High-Fidelity Physics Loop (Smooth Slow Entrance + Interactive Spring & Pendulum)
         function animatePhysics() {
-            if (!isDragging) {
+            if (isEntering) {
+                // Gentle, slow, highly damped drop entrance without violent snapping
+                const enterK = 0.016;       // Soft smooth spring pull
+                const enterDamping = 0.92;  // Elegant gradual decay
+                
+                const forceY = (restingY - posY) * enterK;
+                velY = (velY + forceY) * enterDamping;
+                posY += velY;
+
+                // Subtle natural pendulum sway as it glides down
+                const swayTarget = (restingY - posY) * 0.018;
+                rot += (swayTarget - rot) * 0.06;
+
+                // When card softly settles within 0.35px and nearly motionless
+                if (Math.abs(posY - restingY) < 0.35 && Math.abs(velY) < 0.06) {
+                    posY = restingY;
+                    velY = 0;
+                    rot = 0;
+                    isEntering = false;
+                    hasDropped = true;
+                    targetY = restingY;
+                }
+            } else if (!isDragging) {
                 const springK = 0.055; // Natural elastic pull
                 const damping = 0.88;  // Elegant pendulum decay
 
